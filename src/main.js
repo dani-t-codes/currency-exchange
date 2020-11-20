@@ -29,6 +29,7 @@ async function makeApiCall(currency) {
 $(document).ready(function() {
   $('#convertButton').click(function() {
     event.preventDefault();
+    $("#userInput").html("input#numberToConvert");
     let currency = $('#currencyConversion').val();
     clearFields();
     makeApiCall(currency);
