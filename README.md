@@ -87,7 +87,7 @@ _(**NOTE: (This lesson)[https://www.learnhowtoprogram.com/intermediate-javascrip
 ### Tests
 
 Describe: currencyExchange()
-Exceptions/edge cases: no negative numbers, numbers only, currency not included.
+Exceptions/edge cases: no negative numbers, numbers only, up to two decimal points returning only, currency not included.
 
 
 ## Known bugs
