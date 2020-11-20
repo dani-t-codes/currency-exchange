@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Currency Exchange</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Currency Exchange</h1>
+      </div>
+      <form id="currency-form">
+        <div class="form-group">
+          <label for="search-term" class="body-text" >Search here:</label>
+          <input id="search-term" class="form-control" type="text">
+        
+          <select class="form-control" id="beverage">
+            <option>EUR (Euro)</option>
+            <option>EGP (Egyptian Pound)</option>
+            <option>IDR (Indonesian Rupiah)</option>
+            <option>AUD (Australian Dollar)</option>
+            <option>BRL (Brazilian Real)</option>
+          </select>
+          <button type="submit" class="btn" id="convert-button">Convert</button>
+        </div>
+        <div id="currency-display">
+          <ul></ul>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
