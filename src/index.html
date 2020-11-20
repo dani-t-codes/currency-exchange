@@ -10,22 +10,25 @@
       </div>
       <form id="currency-form">
         <div class="form-group">
-          <label for="numberToConvert" class="form-control">USD:</label>
+          <label for="numberToConvert">USD:</label>
           <input id="numberToConvert" class="form-control" type="text">
-          <label for="currency-exchange" class="form-control">Convert To:</label>
+          <label for="currency-exchange">Convert To:</label>
           <select class="form-control" id="currencyConversion">
-            <option>EUR (Euro)</option>
-            <option>EGP (Egyptian Pound)</option>
-            <option>IDR (Indonesian Rupiah)</option>
-            <option>AUD (Australian Dollar)</option>
+            <option id="AUD">AUD (Australian Dollar)</option>
             <option>BRL (Brazilian Real)</option>
+            <option>EGP (Egyptian Pound)</option>
+            <option>EUR (Euro)</option>
+            <option>IDR (Indonesian Rupiah)</option>
+            <option>MAR (Martian Money)</option>
           </select>
           <button type="submit" class="btn" id="convertButton">Convert</button>
         </div>
       </form>
+      <div class="form-group">
         <div id="showUserInput"></div>
         <div id="showConversion"></div>
         <div id="showErrors"></div>
+      </div>
     </div>
   </body>
 </html>
