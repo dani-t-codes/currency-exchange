@@ -86,10 +86,9 @@ _(**NOTE: (This lesson)[https://www.learnhowtoprogram.com/intermediate-javascrip
 
 ### Tests
 
-Describe: thisFxn()
-Test: thisFxn(doingThisAction)
-Code: hereIsSome.pseudoCode(inaction);
-Expect: thisFxn(w/this data).toEqual(this new data)
+Describe: currencyExchange()
+Exceptions/edge cases: no negative numbers, numbers only, currency not included.
+
 
 ## Known bugs
 
