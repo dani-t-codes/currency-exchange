@@ -27,10 +27,9 @@ async function makeApiCall(currency) {
 //UI Logic
 $(document).ready(function() {
   $('#convertButton').click(function() {
-    event.preventDefault() {
+    event.preventDefault();
     let currency = $('#currencyConversion').val();
     clearFields();
     makeApiCall(currency);
-  };
   });
 });
