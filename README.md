@@ -66,7 +66,8 @@ For this application, you will need to get a secure API key of your own in order
 - Next, visit (Postman's website)[https://www.postman.com/downloads/] and download the application Postman. Postman will allow you to easily check if your newly assigned API key is working.
 - Once downloaded, open the Postman app, and enter the following website with your API key in the appropriate place into the "GET" query bar: `https://v6.exchangerate-api.com/v6/YOUR-API-KEY/latest/USD` and hit the "Send" button. 
 - Make sure the response back from Postman shows a '200 OK' code, which will mean your query was successful. This should result in the bottom of your Postman app appearing like this: ![An image showing a '200 OK' code along with the result:success and subsequent JSON data.!](/assets/images/Postman-success.png "Screenshot of success message in Postman app")
-_(**NOTE: If you need a visual representation of how to check your API is working correctly and how to use Postman, follow along with the instructions provided on (this site)[https://www.learnhowtoprogram.com/intermediate-javascript/asynchrony-and-apis/testing-api-calls-with-postman]. The link will display a different API example, but will give you a clearer understanding of how to walk through this process.)_
+
+_(**NOTE: (This lesson)[https://www.learnhowtoprogram.com/intermediate-javascript/asynchrony-and-apis/testing-api-calls-with-postman]from Epicodus Coding School is an excellent resource if you need more information on how to check your API is working correctly and how to use Postman. The link will display a different API site as its example, but will provide even more in-depth understanding of how to walk through this process.)_
 
 ###### Completing Application Setup
 - Once you have gotten a 200 code response in Postman, copy the API key and add it to the first line of your .env file in this format `API_KEY={your api key here}`. Doing so will keep your personal data (the API key) private.
