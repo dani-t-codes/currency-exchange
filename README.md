@@ -10,7 +10,7 @@ This application allows a user to exchange USD into several other currencies usi
 
 ## Technologies used
 
-- _Javascript_
+- _ES7 Javascript_
 - _Bootstrap_
 - _jQuery_
 - _node.js_
