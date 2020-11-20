@@ -35,3 +35,20 @@ $(document).ready(function() {
     makeApiCall(currency);
   });
 });
+
+//dropdown logic testing
+let dropdown = $('#currencyConversion');
+
+dropdown.empty();
+
+dropdown.append('<option selected="true" disabled>Choose Currency</option>');
+dropdown.prop('selectedIndex', 0);
+
+const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
+
+// Populate dropdown with list of provinces
+$.getJSON(url, function (data) {
+  $.each(data, function (key, entry) {
+    dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.name));
+  });
+});
