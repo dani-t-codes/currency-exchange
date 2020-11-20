@@ -29,7 +29,7 @@ async function makeApiCall(currency) {
 $(document).ready(function() {
   $('#convertButton').click(function() {
     event.preventDefault();
-    
+
     let userDollarInput = $("input#numberToConvert");
     $("#userInput").html(userDollarInput);
 
@@ -42,7 +42,7 @@ $(document).ready(function() {
 //dropdown logic testing
 let dropdown = $('#currencyConversion');
 
-dropdown.empty();
+
 
 dropdown.append('<option selected="true" disabled>Choose Currency</option>');
 dropdown.prop('selectedIndex', 0);
