@@ -4,6 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/styles.css";
 import CurrencyExchange from "./currency-service-service.js";
 
+function clearFields() {
+  $("numberToConvert").val("");
+  $("#showUserInput").text("");
+  $("#showConversion").text("");
+  $("#showErrors").text("");
+}
 //Business Logic
 function getElements(response) {
   if (response.mainTODO) {
