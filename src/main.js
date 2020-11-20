@@ -12,8 +12,9 @@ function clearFields() {
 }
 //Business Logic
 function getElements(response) {
-  if (response.conversion_rates.AUD) {
-    $('#showConversion').text(`The converted rate is ${response.conversion_rates.AUD}.`);
+  if (response.conversion_rates) {
+    $('#showConversion').text(`The converted rate is ${response.conversion_rates}.`);
+  } else {
     $('#showErrors').text(`There was an error: ${response}`);
   }
 }
