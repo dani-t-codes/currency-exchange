@@ -6,19 +6,17 @@ import CurrencyExchange from "./currency-service-service.js";
 
 //Business Logic
 CurrencyExchange
+const conversionMoney = $("#convert-to").val();  //dropdown form pull
 
 
 //Service Logic to currency-service
 
 
 //UI Logic
-$(document).ready(function) {
+$(document).ready(function() {
   $('#convertButton').click(function() {
     let currency = $('#currencyConversion').val();
-    $('#currencyConversion').val("");
-  }
-
-
-const conversionMoney = $("#convert-to").val();  //dropdown form pull
-
-}
+    clearFields();
+    makeApiCall(city);
+  });
+});
