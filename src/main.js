@@ -32,6 +32,3 @@ $(document).ready(function() {
     makeApiCall(city);
   });
 });
-
-
-// const conversionMoney = $("#convert-to").val();  //dropdown form pull
