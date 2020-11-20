@@ -10,10 +10,13 @@ function clearFields() {
   $("#showConversion").text("");
   $("#showErrors").text("");
 }
+
 //Business Logic
 function getElements(response) {
-  if (response.conversion_rates.key) {
-    $('#showConversion').text(`The converted rate is ${response.conversion_rates.key}.`);
+  // let conversionFormula = parseInt(("#numberToConvert")).val() * ${response.conversion_rates};
+
+  if (response.conversion_rate) {
+    $('#showConversion').text(`The converted rate is` + conversionFormula.);
   } else {
     $('#showErrors').text(`There was an error: ${response}`);
   }
