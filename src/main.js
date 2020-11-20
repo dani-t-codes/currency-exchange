@@ -12,8 +12,8 @@ function clearFields() {
 }
 //Business Logic
 function getElements(response) {
-  if (response.mainTODO) {
-    $('#showConversion').text(`The converted rate in ${response.name TODO} is ${response.main.rate TODO}.`);
+  if (response.conversion_rates.AUD) {
+    $('#showConversion').text(`The converted rate from AUD is ${response.conversion_rates_.AUD}.`);
     $('#showErrors').text(`There was an error: ${response}`);
   }
 }
