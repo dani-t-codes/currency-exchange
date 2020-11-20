@@ -5,7 +5,7 @@ import "./css/styles.css";
 import CurrencyExchange from "./currency-service-service.js";
 
 function clearFields() {
-  $("numberToConvert").val("");
+  $("#numberToConvert").val("");
   $("#showUserInput").text("");
   $("#showConversion").text("");
   $("#showErrors").text("");
