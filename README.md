@@ -70,19 +70,19 @@ For this application, you will need to get a secure API key of your own in order
 _(**NOTE: (This lesson)[https://www.learnhowtoprogram.com/intermediate-javascript/asynchrony-and-apis/testing-api-calls-with-postman]from Epicodus Coding School is an excellent resource if you need more information on how to check your API is working correctly and how to use Postman. The link will display a different API site as its example, but will provide even more in-depth understanding of how to walk through this process.)_
 
 ###### Completing Application Setup
-- Once you have gotten a 200 code response in Postman, copy the API key and add it to the first line of your .env file in this format `API_KEY={your api key here}`. Doing so will keep your personal data (the API key) private.
-- Now the API key will apply to the currency exchange API link, and the application should run as expected.
+- Once you have gotten a 200 code response (i.e. a successful response) in Postman, copy the API key and add it to the first line of your .env file in this format `API_KEY={your api key here}`. Doing so will keep your personal data (the API key) private.
+- Now the API key will automatically apply to the currency exchange API link, and the application should run as expected.
 
 ### Specs
 
 | Spec                                            | Input                        | Output                        |
 | :---------------------------------------------- | :--------------------------- | :---------------------------- |
 | **Homepage**                                    | User accesses localhost:5500 | Homepage with user input form |
-| **Program Gathers User Input**                  | User input: "hopes"          | Output: "dreams"              |
-| **Program Removes Spaces from User Input**      | User Input: "hope hope"      | Output: "hopehope"            |
-| **Program Removes Punctuation from User Input** | Input: "h\*o@pe /h#o\*\*p'e" | Output: "hopehope"            |
-| **Program Assigns Characters Numeric Values**   | Input: "hope"                | Output: "4 1 6 2"             |
-| **Program Sums Character Values**               | Input: "4 1 6 2"             | Page Displays: 13             |
+| **Program Gathers User Input**                  | User input: "$USD"           | Output: "X country's currency"|
+| **Program Makes API Call**                      | User Input: "fetch url"      | Output: "return API response" |
+| **Program Parses JSON Data from API Call to Return User Message** | Input: "API fetch" | Output: "API response"|
+| **Program Multiplies Currency Rate by User Input** | Input: "$20"              | Output: "$20 * conversion rate"|
+| **Program Displays User Input & Return Values** | Input: "$20"                 | Page Displays: "AUD $27.40"   |
 
 ### Tests
 
