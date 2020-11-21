@@ -13,10 +13,9 @@ function clearFields() {
 
 //Business Logic
 function getElements(response) {
-  // let conversionFormula = parseInt(("#numberToConvert")).val() * ${response.conversion_rates};
-
-  if (response.conversion_rate) {
-    $('#showConversion').text(`The converted rate is` + conversionFormula.);
+  if (response.conversion_rate.AUD) {
+    $('#showConversion').text(`The conversion rate is ${response.conversion_rates.AUD}.`);
+    //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
   } else {
     $('#showErrors').text(`There was an error: ${response}`);
   }
