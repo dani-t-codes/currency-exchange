@@ -95,6 +95,16 @@ Code: async getExchange(currency) {
   } else return json();
     catch(error)
 }
+Expect: (API Call).toEqual(json response)
+
+Describe: clearFields()
+Expect: clearFields("userInput").toEqual("")
+
+Describe: getElements(response)
+Expect: if jsonData[i].return(jsonData to user)
+
+Describe: makeApiCall(currency) 
+Expect: makeApiCall(userCurrency).toInitialize(apiCall)
 
 Exceptions/edge cases to consider: no negative numbers, numbers only, up to two decimal points returning only, currency not included.
 
