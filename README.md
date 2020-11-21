@@ -86,8 +86,17 @@ _(**NOTE: (This lesson)[https://www.learnhowtoprogram.com/intermediate-javascrip
 
 ### Tests
 
-Describe: currencyExchange()
-Exceptions/edge cases: no negative numbers, numbers only, up to two decimal points returning only, currency not included.
+Describe: getExchange(currency)
+Code: async getExchange(currency) {
+  try{
+    await fetch(url)
+    if !response.ok
+    Error
+  } else return json();
+    catch(error)
+}
+
+Exceptions/edge cases to consider: no negative numbers, numbers only, up to two decimal points returning only, currency not included.
 
 
 ## Known bugs
