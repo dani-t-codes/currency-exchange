@@ -16,6 +16,16 @@ function getElements(response) {
   if (response.conversion_rates.AUD) {
     $('#showConversion').text(`The conversion rate is ${response.conversion_rates.AUD}.`);
     //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
+  } else if (response.conversion_rates.BRL) {
+    $('#showConversion').text(`The conversion rate is ${response.conversion_rates.BRL}.`);
+  } else if (response.conversion_rates.EGP) {
+    $('#showConversion').text(`The conversion rate is ${response.conversion_rates.EGP}.`);
+  } else if (response.conversion_rates.EUR) {
+    $('#showConversion').text(`The conversion rate is ${response.conversion_rates.EUR}.`);
+  } else if (response.conversion_rates.IDR) {
+    $('#showConversion').text(`The conversion rate is ${response.conversion_rates.IDR}.`); 
+  } else if (response.conversion_rates.MAR) {
+    $('#showErrors').text(`There was an error: ${response}`);
   } else {
     $('#showErrors').text(`There was an error: ${response}`);
   }
@@ -51,7 +61,7 @@ const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/US
 
 // Populate dropdown with list of currency rates
 $.getJSON(url, function (data) {
-  $.each(data, function (key, entry) {
-    dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.name));
+  $.each(data, function (response, entry) {
+    dropdown.append($('<option></option>').attr('value', response.conversion_rates).text(response.conversion_rate[entry]));
   });
 });
