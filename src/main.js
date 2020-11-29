@@ -13,8 +13,8 @@ function clearFields() {
 
 //Business Logic
 function getElements(response) {
-  if (response.conversion_rates["AUD"]) {
-    $('#showConversion').text(`The conversion rate is ${response.conversion_rates["AUD"]}.`);
+  if (response.conversion_rates.AUD) {
+    $('#showConversion').text(`The conversion rate is ${response.conversion_rates.AUD}.`);
     //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
   } else {
     $('#showErrors').text(`There was an error: ${response}`);
