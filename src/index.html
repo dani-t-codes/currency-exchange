@@ -16,7 +16,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="numberToConvert">USD:</label>
-                    <input class="form-control" id="numberToConvert" type="text">
+                    <input class="form-control" id="numberToConvert" type="text" min="1" required>
                     <div class="userInput"></div>
                   </div>
                 </div>
@@ -28,7 +28,7 @@
               <div class="card">
                 <div class="card-body">
                   <select id="currencyConversion" class="form-control">
-                    <option selected="true" disabled> Choose Currency </option>
+                    <option selected disabled> Choose Currency </option>
                     <option value="AUD"> AUD (Australian Dollar)</option>
                     <option value="BRL"> BRL (Brazilian Real)</option>
                     <option value="EGP"> EGP (Egyptian Pound)</option>
@@ -46,6 +46,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="form-group">
+                    <div id="showRate"></div>
                     <div id="showConversion"></div>
                     <div id="showErrors"></div>
                   </div>
