@@ -12,13 +12,48 @@ function clearFields() {
   $("#showRate").text("");
 }
 
+function populateDropDown () {
+  let dropdown = $('#currencyConversion');
+  dropdown.length = 1;
+
+  const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
+  // eslint-disable-next-line no-unused-vars 
+  fetch(url)
+    .then(
+      function(response) {
+        if (response.status !== 200) {
+          return "Looks like there was a problem. Status Code: " + response.status;
+        }
+        response.json().then(function(data) {
+          let option;
+
+          for (let i=0; i < data.length; i++) {
+            option.text = Object.keys(data[i].conversion_rates);
+            option.value = Object.values(data[i].conversion_rates);
+            dropdown.add(option);
+          }
+        });
+      }
+    )
+    .catch(function(error) {
+      return error.message;
+    });
+  // $.getJSON(url,function(data){
+  //   $.each(data, function (key, entry) {
+  //     dropdown.append($('<option></option>').attr('value', entry.conversion_rates).text(`${entry.conversion_rates}`));
+  //   });
+  // });
+}
+
 //Business Logic
 function getElements(response) {
-  if (response.conversion_rates["AUD"]) {
-    $('#showConversion').text(`The conversion rate is ${response.conversion_rates["AUD"]}.`);
-    //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
-  } else {
-    $('#showErrors').text(`There was an error: ${response}`);
+  Object.keys(response.conversion_rates); {
+    if (response.json()) {
+      $('#showConversion').text(`The conversion rate is ${response.conversion_rates.AUD}.`);
+      //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
+    } else {
+      $('#showErrors').text(`There was an error: ${response}`);
+    }
   }
 }
 
@@ -33,6 +68,7 @@ $(document).ready(function() {
   $('#convertButton').click(function() {
     event.preventDefault();
     $("#hidden-response").show();
+    populateDropDown();
     let userDollarInput = $("input#numberToConvert");
     $("#userInput").html(userDollarInput);
 
