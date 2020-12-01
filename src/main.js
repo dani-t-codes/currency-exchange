@@ -12,58 +12,34 @@ function clearFields() {
   $("#showRate").text("");
 }
 
-function populateDropDown () {
-  const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
-  
-  let dropdown = $('#currencyConversion');
-  dropdown.prop('selectedIndex', 1);
-
-  $.getJSON(url,function(data){
-    let x = JSON.stringify(data);
-    x = JSON.parse(x);
-    $.each(x.data, function (key, entry) {
-      dropdown.append($('<option></option>').attr('value', entry.conversion_rates.currencyConversion).text(entry.conversion_rates.currencyConversion));
-      $('#currencyConversion').change(function() {
-        let i = this.selectedIndex;
-        i = i-1;
-        $('#currencyConversion').attr('value', x.Object.keys[i].currencyConversion).text(x.data[i].currencyConversion);
-      });
-    });
-  });
-
-  // fetch(url)
-  //   .then(
-  //     function(entry) {
-  //       if (entry.status !== 200) {
-  //         console.log("Looks like there was a problem. Status Code: " + entry.status);
-  //       }
-  //       entry.json().then(function(data) {
-  //         let option;
-
-  //         for (let i=0; i < data.length; i++) {
-  //           option.text = Object.keys(data[i].conversion_rates);
-  //           option.value = Object.values(data[i].conversion_rates);
-  //           dropdown.add(option);
-  //         }
-  //       });
-  //     }
-  //   )
-  //   .catch(function(error) {
-  //     console.log(error.message);
-  //   });
-}
-
 //Business Logic
 function getElements(response) {
-  Object.keys(response.conversion_rates); {
-    if (response.json()) {
-      $('#showConversion').text(`The conversion rate is ${response.conversion_rates.AUD}.`);
-      //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
-    } else {
-      $('#showErrors').text(`There was an error: ${response}`);
+  //real code https://api.jquery.com/each/
+  $('option').each(function(index) {
+    console.log(index + ": " + $(this).text());
+  
+    //pseudo code
+    if (index === Object.keys(response.conversion_rates)) {
+      if ($("#currencyConversion:selected") === (response.conversion_rates.name)) {
+        $('#showConversion').text(`The conversion rate for ${response.conversion_rates.name} is ${response.conversion_rates.rate}.toFixed(2).`);
+        //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
+      } else {
+        $('#showErrors').text(`There was an error: ${response}`);
+      }
     }
-  }
+  });
 }
+
+// testing logic to multiply user input & json data
+// function calculate(response) {
+//   let userDollarInput = parseInt($("input#numberToConvert"));
+//   console.log(parseInt($("input#numberToConvert"))); //NaN
+//   let conversionRate = `${response.conversion_rates}`; //use JSON.parse?? was getting caught in promise
+//   console.log(conversionRate); //now is NaN
+//   let conversion = eval(userDollarInput * conversionRate);
+//   console.log(conversion); //Nonexistent
+//   $('#showConversion').val(conversion);
+// }
 
 //Service Logic to currency-service
 async function makeApiCall(currency) {
@@ -75,7 +51,6 @@ async function makeApiCall(currency) {
 $(document).ready(function() {
   $('#convertButton').click(function() {
     event.preventDefault();
-    populateDropDown();
     
     $("#hidden-response").show();
     let userDollarInput = $("input#numberToConvert");
@@ -89,7 +64,7 @@ $(document).ready(function() {
   });
 });
 
-//Old Business Logic
+//Old & pseudo code Logic for targeting API data w/ dropdown options
 // function getElements(response) {
 //   // $.find({AUD:, BRL:, EGP:, EUR:, IDR:}, calculate(response));
 //   if (response.conversion_rates.AUD) {
@@ -112,18 +87,6 @@ $(document).ready(function() {
 //   }
 // }
 
-// function calculate(response) {
-//   let userDollarInput = parseInt($("input#numberToConvert"));
-//   console.log(parseInt($("input#numberToConvert"))); //NaN
-//   let conversionRate = `${response.conversion_rates}`; //use JSON.parse?? was getting caught in promise
-//   console.log(conversionRate); //now is NaN
-//   let conversion = eval(userDollarInput * conversionRate);
-//   console.log(conversion); //Nonexistent
-//   $('#showConversion').val(conversion);
-// }
-
-
-
 //dropdown logic testing
 //function getOption() {
 // let dropdown = $('#currencyConversion');
@@ -131,16 +94,3 @@ $(document).ready(function() {
 //$("#elementID :selected").val();
 
 // dropdown.prop('selectedIndex', 1);
-
-
-
-
-
-
-
-// // Populate dropdown with list of currency rates
-// $.getJSON(response, function (data) {
-//   $.each(data, function (response, entry) {
-//     dropdown.append($('<option></option>').attr('value', response.conversion_rates).text(response.conversion_rate[entry]));
-//   });
-// });
