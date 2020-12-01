@@ -6,7 +6,7 @@
 
 ## Description
 
-This application allows a user to exchange USD into several other currencies using this (exchange rate API)[https://www.exchangerate-api.com/] and it's subsequent data.
+This application allows a user to exchange USD into several other currencies using the (Exchange Rate API)[https://www.exchangerate-api.com/] and it's subsequent data.
 
 ## Technologies used
 
@@ -111,8 +111,8 @@ Exceptions/edge cases to consider: no negative numbers, numbers only, up to two 
 
 ## Known bugs
 
-_{I am Danielle's *bug* that needs fixing. I might impact this app by doing xyz. But you can do abc to get around me. Can do future fix me plz!}_
+_Yes._
 
 ### Legal, or License
 
-_MIT_ Copyright (c) 2020 **_{List of contributors or company name}_**
+_MIT_ Copyright (c) 2020 *_Danielle Thompson_**
