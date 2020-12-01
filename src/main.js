@@ -13,36 +13,44 @@ function clearFields() {
 }
 
 function populateDropDown () {
-  let dropdown = $('#currencyConversion');
-  dropdown.length = 1;
-
   const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
-  // eslint-disable-next-line no-unused-vars 
-  fetch(url)
-    .then(
-      function(response) {
-        if (response.status !== 200) {
-          return "Looks like there was a problem. Status Code: " + response.status;
-        }
-        response.json().then(function(data) {
-          let option;
+  
+  let dropdown = $('#currencyConversion');
+  dropdown.prop('selectedIndex', 1);
 
-          for (let i=0; i < data.length; i++) {
-            option.text = Object.keys(data[i].conversion_rates);
-            option.value = Object.values(data[i].conversion_rates);
-            dropdown.add(option);
-          }
-        });
-      }
-    )
-    .catch(function(error) {
-      return error.message;
+  $.getJSON(url,function(data){
+    let x = JSON.stringify(data);
+    x = JSON.parse(x);
+    $.each(x.data, function (key, entry) {
+      dropdown.append($('<option></option>').attr('value', entry.conversion_rates.currencyConversion).text(entry.conversion_rates.currencyConversion));
+      $('#currencyConversion').change(function() {
+        let i = this.selectedIndex;
+        i = i-1;
+        $('#currencyConversion').attr('value', x.Object.keys[i].currencyConversion).text(x.data[i].currencyConversion);
+      });
     });
-  // $.getJSON(url,function(data){
-  //   $.each(data, function (key, entry) {
-  //     dropdown.append($('<option></option>').attr('value', entry.conversion_rates).text(`${entry.conversion_rates}`));
+  });
+
+  // fetch(url)
+  //   .then(
+  //     function(entry) {
+  //       if (entry.status !== 200) {
+  //         console.log("Looks like there was a problem. Status Code: " + entry.status);
+  //       }
+  //       entry.json().then(function(data) {
+  //         let option;
+
+  //         for (let i=0; i < data.length; i++) {
+  //           option.text = Object.keys(data[i].conversion_rates);
+  //           option.value = Object.values(data[i].conversion_rates);
+  //           dropdown.add(option);
+  //         }
+  //       });
+  //     }
+  //   )
+  //   .catch(function(error) {
+  //     console.log(error.message);
   //   });
-  // });
 }
 
 //Business Logic
@@ -67,8 +75,9 @@ async function makeApiCall(currency) {
 $(document).ready(function() {
   $('#convertButton').click(function() {
     event.preventDefault();
-    $("#hidden-response").show();
     populateDropDown();
+    
+    $("#hidden-response").show();
     let userDollarInput = $("input#numberToConvert");
     $("#userInput").html(userDollarInput);
 
