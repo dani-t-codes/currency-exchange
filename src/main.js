@@ -49,12 +49,16 @@ async function makeApiCall(currency) {
 
 //UI Logic
 $(document).ready(function() {
+  //api call for drop down here
   $('#convertButton').click(function() {
     event.preventDefault();
     
     $("#hidden-response").show();
-    let userDollarInput = $("input#numberToConvert");
-    $("#userInput").html(userDollarInput);
+    $("input#numberToConvert").val("");
+    $('#currencyConversion').val("disabled");
+
+    const userDollarInput = $("input#numberToConvert").val();
+    $("#showRate").html(`${userDollarInput}`);
 
     let currency = $('#currencyConversion').prop(":selected");
     console.log(currency); //undefined
