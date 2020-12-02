@@ -5,11 +5,9 @@ import "./css/styles.css";
 import CurrencyExchange from "./currency-service.js";
 
 function clearFields() {
-  $("#numberToConvert").val("");
-  $("#showUserInput").text("");
-  $("#showConversion").text("");
-  $("#showErrors").text("");
-  $("#showRate").text("");
+  $("#hidden-response").show();
+  $("input#numberToConvert").val("");
+  $('#currencyConversion').val("disabled");
 }
 
 //Business Logic
@@ -52,12 +50,8 @@ $(document).ready(function() {
   //api call for drop down here
   $('#convertButton').click(function() {
     event.preventDefault();
-    
-    $("#hidden-response").show();
-    $("input#numberToConvert").val("");
-    $('#currencyConversion').val("disabled");
-
-    const userDollarInput = $("input#numberToConvert").val();
+    //user input
+    const userDollarInput = $("#numberToConvert").val();
     $("#showRate").html(`${userDollarInput}`);
 
     let currency = $('#currencyConversion').prop(":selected");
