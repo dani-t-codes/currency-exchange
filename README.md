@@ -73,7 +73,7 @@ _(**NOTE: (This lesson)[https://www.learnhowtoprogram.com/intermediate-javascrip
 
 ###### Completing Application Setup
 - Once you have gotten a 200 code response (i.e. a successful response) in Postman, copy the API key and add it to the first line of your .env file in this format `API_KEY={your-api-key-here}`. Doing so will keep your personal data (the API key) private.
-- Now the API key will automatically apply to the currency exchange API link, and the application should run as expected.
+- Now the API key you acquired in the 'API Key and Using an .env File' section above will automatically apply to the currency exchange API link, and the application should run as expected.
 
 ### Specs
 
