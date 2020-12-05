@@ -10,35 +10,46 @@ function clearFields() {
 }
 
 function getElements(response) {
-  let userDollarInput = $('#numberToConvert').val();
-  let currencyCode = $('#currency').val();
-  // for (const [key, value] of Object.entries(response.conversion_rates)) {
-  if (response.conversion_rates[currencyCode]) {
-    $("#showConversion").html(`${currencyCode}: ${response.conversion_rates[currencyCode] * userDollarInput}. The conversion rate is ${response.conversion_rates[currencyCode]} to 1 USD.`);
-    console.log(`${currencyCode}: ${response.conversion_rates[currencyCode] * userDollarInput}. The conversion rate is ${response.conversion_rates[currencyCode]} to 1 USD.`);
-  } else {
-    $("#showErrors").html((`There was an error: ${response.message}. Please try again.`));
+  const userDollarInput = $('#numberToConvert').val(); //added parseInt - returned same undefined result as it does w/o
+  const currencyCode = $('#currency').val();
+  if (response.conversion_rates) { //added Object.values & entries - no change
+    if (isNaN(response.conversion_rates[currencyCode])) { //added Object.values - returned w/ undefined error
+      $("#showErrors").html(`There was an error: ${response.result}`);
+    } else if (response.conversion_rates[currencyCode]) {
+      $("#showConversion").html(`${currencyCode}: ${response.conversion_rates[currencyCode] * userDollarInput}. The conversion rate is ${response.conversion_rates[currencyCode]} to 1 USD.`);
+      //blank, undefined, Nan
+    } else {
+      $("#showErrors").html((`There was an error: ${response.result}. Please try again.`));
+    }
   }
 }
-// }
 
+// function getDropDownOpts(call) {
+//   for (let i=1; i <= response.conversion_rates.length; i++) {
+//     let values = Object.entries(response.conversion_rates[i].map((key, value) => `<option id="${key}" value="${value}" disabled>${key}</option>`));
+//     $('option').append(values);
+//   }
+  
 async function makeApiCall(currency) {
   const response = await CurrencyExchange.getExchange(currency);
   getElements(response);
 }
 
+// async function makeApiDropdownCall(dropdownCall) {
+//   const call = await CurrencyExchange.getExchange(dropdownCall);
+//   getDropDownOpts(call);
+// }
+
 //UI Logic
 $(document).ready(function() {
   // $('#dropDownToConvert').click(function() {
+  // makeApiDropdownCall();
+  // });      
   $('#convertButton').click(function(event) {
     event.preventDefault();
+    let currency = $('#currency').val();
     $("#hiddenResponse").show();
-    //user input
-    const userDollarInput = $("#numberToConvert").val();
-    const userCurrency = $('#currency').val(); 
-    $("#showConversion").html(userDollarInput + userCurrency);
     clearFields();
-    makeApiCall();
+    makeApiCall(currency);
   });
 });
-// });
