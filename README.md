@@ -62,7 +62,7 @@ For this application, you will need to get a secure API key of your own in order
 - To get your own secure API key, visit (this website)[https://www.exchangerate-api.com/] to set up an account. 
 - Input your email address and click the "Get Free Key" button.
 - You will be prompted to create an account with your email, first name, and a password. Agree to the terms of use and click "Get Started!"
-- From here, you will be automatically redirected to your account's dashboard where you will see your API Key under the second section, "API Access", on the page. 
+- From here, you will be automatically redirected to your account's dashboard where you will see your API Key under the second section, "API Access", on the page. Keep this page up while you complete the remaining steps for application setup. 
 
 ###### Testing with Postman
 - Next, visit (Postman's website)[https://www.postman.com/downloads/] and download the application Postman. Postman will allow you to easily check if your newly assigned API key is working.
