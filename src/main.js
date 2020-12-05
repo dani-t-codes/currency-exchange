@@ -6,140 +6,94 @@ import CurrencyExchange from "./currency-service.js";
 
 function clearFields() {
   $("#numberToConvert").val("");
+  $("#currency").val("");
   $("#showUserInput").text("");
   $("#showConversion").text("");
   $("#showRate").text("");
 }
 
-function displayErrors(error) {
-  $("#showErrors").text(`${error}`);
-}
-
-function getDropdown(response) {
-  // let dropdown = $('#currencyConversion');
-  for (let i=1; i <= response.conversion_rates.length - 1; i += 1) {
-    let values = Object.values(response.conversion_rates[i]).map((value)=> `<option value=${value}>${value}</option>`);
-    $('#currencyConversion').append(values);
+// real code https://api.jquery.com/each/
+function getElements(response) {
+  // let currencies = Object.keys(response.conversion_rates);
+  // let rates = Object.values(response.conversion_rates);
+  let userCurrency = $('input#currency').val(); 
+  for (let i=0; i < response.conversion_rates.length; i++) {
+    for (const [key, value] of Object.entries(response.conversion_rates)) {
+      if (`${key}` === userCurrency) {
+        console.log( (`${key}: ${value * userCurrency} at ${value} to 1 USD.`));
+      } else {
+        console.log((`There was an error: ${response.message}. Currency does not exist in the database. Please try again.`));
+      }
+    }
+  // $("#showConversion").text();
   }
 }
 
-//dropdown logic testing
-//function getOption() {
-// let value = dropdown.options[dropdown.selectedIndex].value;
-//$("#elementID :selected").val();
 
-// dropdown.prop('selectedIndex', 1);
-
-
-// eslint-disable-next-line no-unused-vars
-function getElements(response) {
-  // real code https://api.jquery.com/each/
-  $('option').each(function(index) {
-    console.log(index + ": " + $(this).text());
-
-    // pseudo code
-    if (index === Object.keys(response.conversion_rates)) {
-      if ($("#currencyConversion:selected") === (response.conversion_rates.name)) {
-        $('#showConversion').text(`The conversion rate for ${response.conversion_rates.name} is ${response.conversion_rates.rate}.toFixed(2).`);
-        //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
-      } else {
-        $('#showErrors').text(`There was an error: ${response}`);
-      }
-    }
-    // testing logic to multiply user input & json data
-    // function calculate(response) {
-    //   let userDollarInput = parseInt($("input#numberToConvert"));
-    //   console.log(parseInt($("input#numberToConvert"))); //NaN
-    //   let conversionRate = Object.values(response.conversion_rates); //use JSON.parse?? was getting caught in promise
-    //   console.log(conversionRate); //now is NaN
-    //   let conversion = eval(userDollarInput * conversionRate);
-    //   console.log(conversion); //Nonexistent
-    //   $('#showConversion').val(conversion);
-    // }
-
-    function calculate(response) {
-      // let dropdown = $('#currencyConversion');
-      // let dropdownSelections = dropdown.options[dropdown.selectedIndex].text;
-      let AUD = response.conversion_rates.AUD; //would add user input math * AUD here (?)
-      let BRL = response.conversion_rates.BRL;
-      let EGP = response.conversion_rates.EGP;
-      let EUR = response.conversion_rates.EUR;
-      let IDR = response.conversion_rates.IDR;
-      let MAR = response.error;
-      if (('option') === AUD) { //if 'select' ? 
-        $('#showRate').val(AUD);
-      } else if (('option') === BRL) {
-        $('#showRate').val(BRL);
-      } else if (('option') === EGP) {
-        $('#showRate').val(EGP);
-      } else if (('option') === EUR) {
-        $('#showRate').val(IDR);
-      } else if (('option') === MAR) {
-        $('#showErrors').text(`${response.error}`);
-      } else if ($('#numberToConvert') === isNaN || $('#numberToConvert') < 0 || $('#numberToConvert') == "") {
-        $('#showErrors').text(`${response.error}`);
-      }
-    }
-
-    async function makeApiCall(currency) {
-      const response = await CurrencyExchange.getExchange(currency);
-      getElements(response);
-    }
-
-    //UI Logic
-    $(document).ready(function() {
-      //api call for drop down here
-      CurrencyExchange.getExchange()
-        .then(function(currency) {
-          if (currency instanceof Error) {
-            throw Error(`Exchange Rate API error: ${currency.message}`);
-          }
-          getDropdown(currency);
-        })
-        .catch(function(error) {
-          displayErrors(error.message);
-        });
-      $('#convertButton').click(function() {
-        event.preventDefault();
-        //clear forms, show hidden section
-        $("#hidden-response").show();
-        $("input#numberToConvert").val("");
-        $('#currencyConversion').val("disabled");
-        //user input
-        const userDollarInput = $("#numberToConvert").val();
-        $("#showRate").val(`${userDollarInput}`);
-
-        let currency = $('#currencyConversion').val("selected");
-        console.log(`${currency}`); //[object Object]]
-        clearFields();
-        makeApiCall(currency);
-        calculate();
-      });
-    });
-  });
+async function makeApiCall(currency) {
+  const response = await CurrencyExchange.getExchange(currency);
+  getElements(response);
 }
 
+//UI Logic
+$(document).ready(function() {
+  // event.preventDefault();
+  $('#convertButton').click(function() {
+    //clear forms, show hidden section
+    $("#hidden-response").show();
+    // $("input#numberToConvert").val("");
+    //user input
+    const userDollarInput = $("#numberToConvert").val();
+    const userCurrency = $('#currency').val(); 
+    $("#showRate").val(`${userDollarInput}`);
+    $("#showRate").val(`${userCurrency}`);
+    console.log(`${userDollarInput}`);
+    // let currency = $('#currency').val();
+    console.log(`${userCurrency}`); //EUR! 
+    clearFields();
+    makeApiCall();
+  });
+});
 
-//Old & pseudo code Logic for targeting API data w/ dropdown options
-//This fxn only returned AUD conversion rate because it's only targeting the if statement 
 
-// function getElements(response) {
-//   if (response.conversion_rates.AUD) {
-//     $('#showRate').text(`The conversion rate is ${response.conversion_rates.AUD}.`);
-//     // $('#showConversion').text(`The equal dollar amount in AUD is ${response.conversion_rates.AUD} * (TODO user input)).`);
-//   } else if (response.conversion_rates.BRL) {
-//     $('#showRate').text(`The conversion rate is ${response.conversion_rates.BRL}.`);
-//   } else if (response.conversion_rates.EGP) {
-//     $('#showRate').text(`The conversion rate is ${response.conversion_rates.EGP}.`);
-//   } else if (response.conversion_rates.EUR) {
-//     $('#showRate').text(`The conversion rate is ${response.conversion_rates.EUR}.`);
-//   } else if (response.conversion_rates.IDR) {
-//     $('#showRate').text(`The conversion rate is ${response.conversion_rates.IDR}.`); 
-//   } else if (response.conversion_rates.MAR) {
-//     $('#showErrors').text(`There was an error: ${response.result}`);
-//   } else if (response === isNaN || response < 0 || response == "") {  //might need to move up b/c is most specific
-//     $('#showErrors').text("Not a valid number.");
+// if (currencies[i] === "EUR") {
+//   return `Currency: ${currencies}, Conversion Rate: ${rates}`;
+// }; 
+//     $('#showConversion').text(`The conversion rate for ${currencies} is ${rates}.`);
+//     //$('#showConversion').text(`The equal dollar amount is (multiplication formula here).`);
 //   } else {
-//     $('.showErrors').text(`There was an error: ${response}`);
-//   };
+//     $('#showErrors').text(`There was an error: ${response}`);
+//   }
+// }
+// testing logic to multiply user input & json data
+// function calculate(response) {
+//   let userDollarInput = parseInt($("input#numberToConvert"));
+//   console.log(parseInt($("input#numberToConvert"))); //NaN
+//   let conversionRate = Object.values(response.conversion_rates); //use JSON.parse?? was getting caught in promise
+//   console.log(conversionRate); //now is NaN
+//   let conversion = eval(userDollarInput * conversionRate);
+//   console.log(conversion); //Nonexistent
+//   $('#showConversion').val(conversion);
+// }
+
+//calculate(responseValue) {
+//this.userDollarInput = parseInt($("input#numberToConvert").val());
+//this.conversionRate = $("input#currency").val(`${response.conversion_rates[i]`});
+//return this.UserDollarInput * this.conversionRate;
+
+// function calculate(response) {
+//   let AUD = response.conversion_rates.AUD; //would add user input math * AUD here (?)
+//   let BRL = response.conversion_rates.BRL;
+//   let EGP = response.conversion_rates.EGP;
+//   let EUR = response.conversion_rates.EUR;
+//   let IDR = response.conversion_rates.IDR;
+//   if (AUD) { 
+//     $('#showRate').val(AUD);
+//   } else if (BRL) {
+//     $('#showRate').val(BRL);
+//   } else if (EGP) {
+//     $('#showRate').val(EGP);
+//   } else if (EUR) {
+//     $('#showRate').val(IDR);
+//   } 
 // }
