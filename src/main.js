@@ -7,27 +7,33 @@ import CurrencyExchange from "./currency-service.js";
 function clearFields() {
   $("#numberToConvert").val("");
   $("#currency").val("");
-  $("#showUserInput").text("");
-  $("#showConversion").text("");
-  $("#showRate").text("");
+  // $("#showUserInput").text("");
+  // $("#showConversion").text("");
+  // $("#showRate").text("");
 }
 
 // real code https://api.jquery.com/each/
 function getElements(response) {
   // let currencies = Object.keys(response.conversion_rates);
   // let rates = Object.values(response.conversion_rates);
-  let userCurrency = $('input#currency').val(); 
-  for (let i=0; i < response.conversion_rates.length; i++) {
-    for (const [key, value] of Object.entries(response.conversion_rates)) {
-      if (`${key}` === userCurrency) {
-        console.log( (`${key}: ${value * userCurrency} at ${value} to 1 USD.`));
-      } else {
-        console.log((`There was an error: ${response.message}. Currency does not exist in the database. Please try again.`));
-      }
+  // let userCurrency = $('input#currency').val(); 
+  // let userDollarInput = $("#numberToConvert").val();
+  // for (let i=0; i < response.conversion_rates.length; i++) {
+  // let userInput = $('input#currency').val();
+  // let jsonResponse = Object.entries(response.conversion_rates);
+  // let userInput = jsonResponse;
+  for (const [key, value] of Object.entries(response.conversion_rates)) {
+    if (`${key}`) {
+      $("#showRate").html(`${key}: ${value}. The conversion rate is ${value} to 1 USD.`);
+      console.log(`${key}: ${value}. The conversion rate is ${value} to 1 USD.`);
+    } else {
+      $("#showRate").html((`There was an error: ${response.message}. Currency does not exist in the database. Please try again.`));
     }
-  // $("#showConversion").text();
   }
 }
+// $("#showConversion").text();
+// }
+
 
 
 async function makeApiCall(currency) {
@@ -37,19 +43,14 @@ async function makeApiCall(currency) {
 
 //UI Logic
 $(document).ready(function() {
-  // event.preventDefault();
-  $('#convertButton').click(function() {
-    //clear forms, show hidden section
-    $("#hidden-response").show();
-    // $("input#numberToConvert").val("");
+  $('#convertButton').click(function(event) {
+    event.preventDefault();
+    $("#hiddenResponse").show();
     //user input
     const userDollarInput = $("#numberToConvert").val();
     const userCurrency = $('#currency').val(); 
-    $("#showRate").val(`${userDollarInput}`);
-    $("#showRate").val(`${userCurrency}`);
-    console.log(`${userDollarInput}`);
-    // let currency = $('#currency').val();
-    console.log(`${userCurrency}`); //EUR! 
+    $("#showConversion").html(userDollarInput + userCurrency);
+    // console.log(`${response.conversion_rates.AUD}`); // have to declare response, does not currently work 
     clearFields();
     makeApiCall();
   });
