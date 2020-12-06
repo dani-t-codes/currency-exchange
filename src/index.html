@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <meta charset="UTF-8">
     <title>Currency Exchange</title>
   </head>
   <body>
     <div class="container">
       <div class="jumbotron">
-        <h1>Currency Exchange</h1>
+        <h1>CURRENCY EXCHANGE</h1>
       </div>
       <form id="currency-form">
         <div class="container">
@@ -16,7 +17,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="numberToConvert">USD:</label>
-                    <input id="numberToConvert" class="form-control" type="number" placeholder="0" required>
+                    <input id="numberToConvert" class="form-control" type="number" min="0" placeholder="0" required>
                     <div class="userInput"></div>
                   </div>
                 </div>
@@ -27,9 +28,10 @@
             <div class="col-6">
               <div class="card">
                 <div class="card-body">
-                  <div class="form-group">
-                    <select id="dropDownToConvert" name="dropDownToConvert">
-                      <option for="dropDownToConvert" placeholder="Choose a Currency:" disabled>Choose a Currency:</option>
+                  <div class="dropdown">
+                    <label for="dropDownToConvert">Use this list (view-only) to see the most current list of available currencies:</label>
+                    <select class="btn btn-secondary dropdown-toggle" id="dropDownToConvert" name="dropDownToConvert">
+                      <option for="dropDownToConvert" placeholder="Choose a Currency:">Choose a Currency:</option>
                     </select>
                   </div>
                 </div>
@@ -41,11 +43,11 @@
               <div class="card">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="currency">Enter a currency, in its three-letter abbreviation form:</label>
-                    <input id="currency" class="form-control" type="text" placeholder="(e.g. AUD, BRL, EUR, etc.)" required>
+                    <label for="currency">Enter a currency from above, in its three-letter abbreviation form:</label>
+                    <input id="currency" class="form-control" type="text" placeholder="(e.g. AUD, BRL, EUR...)" required>
                   </div>
                   </select>
-                  <button type="submit" class="btn btn-success" id="convertButton">Convert</button>
+                  <button type="submit" class="btn btn-success" id="convertButton">CONVERT</button>
                 </div>
               </div>
             </div>
@@ -54,7 +56,6 @@
             <div class="col-6">
               <div class="card">
                 <div class="card-body">
-                  <div id="showRate"></div>
                   <div id="showConversion"></div>
                   <div id="showErrors"></div>
                 </div>
