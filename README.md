@@ -126,9 +126,13 @@ Expect: makeApiCall(userCurrency).toInitialize(apiCall1)
 Describe: makeApiDropdownCall()
 Expect: makeApiCall(onDropDown.click).toInitialize(apiCall2)
 
+## Stretch Goals
+
+For stretch goals, I would reroute the 'convert' button to display values directly from the dropdown list, but for the sake of time, it is currently only available for a user's reference, in case they - like I - do not know a vast swath of the world's abbreviated currencies.
+
 ## Known bugs
 
-Negative values can still be entered manually by the user, despite setting the minimum value of the USD input form to '0'.  
+Negative values can still be entered manually by the user, despite setting the minimum value of the USD input form to '0'. The dropdown selection cannot be tabbed to via a keyboard, it must be clicked on to generate the API call's values. 
 
 ### Legal, or License
 
