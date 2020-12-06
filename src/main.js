@@ -11,28 +11,26 @@ function clearFields() {
 }
 
 function getElements(response) {
-  const userDollarInput = $('input#numberToConvert').val(); //added parseInt - returned same undefined result as it does w/o
-  const currencyCode = $('input#currency').val();
-  if (response.conversion_rates) { //if api call -- DON'T add Object.values & entries
-    if (isNaN(response.conversion_rates[currencyCode])) { //added Object.x - returned w/ undefined red error
-      console.log(Object.keys(response.conversion_rates));
-      console.log(currencyCode);
-      console.log(userDollarInput);
-      $("#showErrors").html(`aaThere was an error: ${response.error_type}`);
+  const userDollarInput = $('input#numberToConvert').val();
+  const currencyCode = ($('input#currency').val()).toUpperCase();
+  if (response.conversion_rates) {
+    if (isNaN(response.conversion_rates[currencyCode])) {
+      $("#showErrors").html(`There was an error: ${response.error_type}`);
     } 
-    else { //response.conversion_rates[currencyCode]
+    else {
       $("#showConversion").html(`${currencyCode}: ${response.conversion_rates[currencyCode] * userDollarInput}. The conversion rate is ${response.conversion_rates[currencyCode]} to 1 USD.`);
-      //blank, undefined, Nan //added parseInt to $userDI - still undefined
     }
   } else {
-    $("#showErrors").html((`bbThere was an error: ${response.error_type}. Please try again.`));
+    $("#showErrors").html((`There was an error: ${response.error_type}. Please try again.`));
   }
 }
 
 function getDropDownOpts(call) {
-  for (let i=1; i <= call.conversion_rates.length - 1; i++) {
-    let values = Object.keys(call.conversion_rates[i].map((key) => `<option value="${key}">${key}</option>`));
-    $('select').append(values);
+  if (call.conversion_rates) {
+    let dropdownChoices = Object.entries(call.conversion_rates).map((key) => `<option value=${key}>${key}</option>`);
+    $('select').append(dropdownChoices);
+  } else {
+    $('#showErrors').html(`There was a dropdown error: ${call.error_type}`);
   }
 }
   
@@ -44,13 +42,11 @@ async function makeApiCall() {
 async function makeApiDropdownCall() {
   const call = await DropdownExchange.getDropdown();
   getDropDownOpts(call);
-  console.log("Yes!"); //Yes!
 }
 
 $(document).ready(function() {
   $('#dropDownToConvert').click(function(event) {
     event.preventDefault();
-    // $('.dropdown').dropdown(); https://getbootstrap.com/docs/4.1/components/dropdowns/
     makeApiDropdownCall(); 
   });      
   $('#convertButton').click(function(event) {
