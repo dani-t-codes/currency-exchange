@@ -6,13 +6,13 @@ import CurrencyExchange from "./js/currency-service.js";
 import DropdownExchange from "./js/dropdown-service.js";
 
 function clearFields() {
-  $("#numberToConvert").val("");
-  $("#currency").val("");
+  $('#dropDownToConvert').val("");
+  $('#hiddenResponse').show();
 }
 
 function getElements(response) {
-  const userDollarInput = $('input#numberToConvert').val();
-  const currencyCode = ($('input#currency').val()).toUpperCase();
+  const userDollarInput = $('#numberToConvert').val();
+  const currencyCode = ($('#currency').val()).toUpperCase();
   if (response.conversion_rates) {
     if (isNaN(response.conversion_rates[currencyCode])) {
       $("#showErrors").html(`There was an error: ${response.error_type}`);
@@ -45,15 +45,15 @@ async function makeApiDropdownCall() {
 }
 
 $(document).ready(function() {
-  $('#dropDownToConvert').click(function(event) {
-    event.preventDefault();
-    makeApiDropdownCall(); 
+  $('#hiddenResponse').hide();
+  $('#dropDownToConvert').click(function() {
+    let dropdown = $('#dropDownToConvert').attr("value");
+    makeApiDropdownCall(dropdown); 
   });      
-  $('#convertButton').click(function(event) {
+  $('#convertButton').click(function() {
     event.preventDefault();
     let currency = $('#currency').val();
-    $("#hiddenResponse").show();
+    clearFields();
     makeApiCall(currency);
   });
-  clearFields();
 });
