@@ -6,7 +6,7 @@
 
 ## Description
 
-This application allows a user to exchange USD into several other currencies using the (Exchange Rate API)[https://www.exchangerate-api.com/] and it's subsequent data.
+This application allows a user to exchange USD into several other currencies using the (Exchange Rate API)[https://www.exchangerate-api.com/] and its subsequent data.
 
 ## Technologies used
 
