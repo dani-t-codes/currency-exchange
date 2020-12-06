@@ -1,14 +1,13 @@
 export default class DropdownExchange {
-  // eslint-disable-next-line no-unused-vars
-  static async getDropdown(dropdownCall) {
+  static async getDropdown() {
     try {
-      const response = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`);
-      if (!response.ok) {
-        throw Error(response.statusText);
+      const call = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`);
+      if (!call.ok) {
+        throw Error(call.statusText);
       }
-      return response.json();
+      return call.json();
     } catch(error) {
-      return error.result;
+      return error.error_type;
     }
   }
 }
