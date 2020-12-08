@@ -15,7 +15,7 @@ function getElements(response) {
   const currencyCode = ($('#currency').val()).toUpperCase();
   if (response.conversion_rates) {
     if (isNaN(response.conversion_rates[currencyCode])) {
-      $("#showErrors").html(`There was an error: ${response.error_type}`);
+      $("#showErrors").html(`There was an error. This currency does not exist. ${response.error_type}`);
     } 
     else {
       $("#showConversion").html(`${currencyCode}: ${response.conversion_rates[currencyCode] * userDollarInput}. The conversion rate is ${response.conversion_rates[currencyCode]} to 1 USD.`);
