@@ -22,14 +22,6 @@ This application allows a user to exchange USD into several other currencies usi
 - _Jest_
 - _Babel_
 
-## Color theme
-
-- _#2E3C8C (Med-dark blue)_
-- _#CEF2F2 (Light blue)_
-- _#F2600C (Orange)_
-- _#590202 (Burnt red)_
-- _#0D0D0D (Black)_
-
 ## Installation Requirements
 
 ###### For Mac Users
