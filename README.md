@@ -112,7 +112,7 @@ Test: if jsonData[AUD].return(jsonData[AUD].value * $20)
 Describe: getDropDownOpts()
 Expect: if jsonData[i].return(<option>jsonData[i]</option).forEach();
 
-Describe: makeApiCall() 
+Describe: makeApiCall()
 Expect: makeApiCall(userCurrency).toInitialize(apiCall1)
 
 Describe: makeApiDropdownCall()
@@ -124,7 +124,7 @@ For stretch goals, I would reroute the 'convert' button to display values direct
 
 ## Known bugs
 
-Negative values can still be entered manually by the user, despite setting the minimum value of the USD input form to '0'. The dropdown selection cannot be tabbed to via a keyboard, it must be clicked on to generate the API call's values. 
+Negative values can still be entered manually by the user, despite setting the minimum value of the USD input form to '0'. The dropdown selection cannot be tabbed to via a keyboard, it must be clicked on to generate the API call's values.
 
 ### Legal, or License
 
