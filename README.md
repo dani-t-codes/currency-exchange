@@ -1,8 +1,14 @@
+<div align="center">
+
 # Currency Exchange
 
 #### Independent Project on Asynchronous Code & APIs, Epicodus Wk. 6, 11.20.2020
 
 #### By Danielle Thompson
+
+![Splash Page Image](assets/images/Splash_page.png)
+
+</div>
 
 ## Description
 
